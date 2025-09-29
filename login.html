@@ -81,7 +81,7 @@
       <div class="mt-8 text-center">
         <p class="text-indigo-200">
           Don't have an account?
-          <a href="signup.html" class="font-medium text-white hover:text-indigo-200 transition">Sign up</a>
+          <a href="/signup" class="font-medium text-white hover:text-indigo-200 transition">Sign up</a>
         </p>
       </div>
     </div>
@@ -100,12 +100,10 @@
         feather.icons['eye'].replace(icon);
       }
     });
-
     // Login function
     async function loginUser() {
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-
       const response = await fetch('/api/login', {
         method: 'POST',
         headers: {
@@ -113,21 +111,17 @@
         },
         body: JSON.stringify({ email: email, password: password }),
       });
-
       const result = await response.json();
-
       if (result.success) {
         // ¡IMPORTANTE! Guardamos los datos del usuario para usarlos en el dashboard
         localStorage.setItem('userName', result.user.username);
         localStorage.setItem('userRole', result.user.role);
-
         // Redirigimos al dashboard
         window.location.href = '/dashboard';
       } else {
         alert('Error: ' + result.message);
       }
     }
-
     // Initialize Feather Icons
     feather.replace();
   </script>
