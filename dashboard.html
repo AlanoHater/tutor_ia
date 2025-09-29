@@ -12,15 +12,6 @@
         .gradient-bg { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
         .glass-card { backdrop-filter: blur(16px); background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); }
         .active-tab { background-color: rgba(255, 255, 255, 0.2); }
-        .chat-bubble { max-width: 75%; padding: 12px 16px; border-radius: 20px; }
-        .user-bubble { background-color: #eef2ff; color: #4338ca; align-self: flex-end; }
-        .ai-bubble { background-color: #f3f4f6; color: #1f2937; align-self: flex-start; }
-        .kahoot-btn { transition: transform 0.1s ease-in-out; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.125rem; color: white; padding: 1rem; border-radius: 0.5rem; }
-        .kahoot-btn:hover { transform: scale(1.03); }
-        .kahoot-red { background-color: #ef4444; }
-        .kahoot-blue { background-color: #3b82f6; }
-        .kahoot-yellow { background-color: #eab308; }
-        .kahoot-green { background-color: #22c55e; }
     </style>
 </head>
 <body class="min-h-screen bg-gray-100">
@@ -34,17 +25,46 @@
                     <div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center"><span id="userInitials"></span></div>
                     <div><p id="userName"></p><p id="userRole" class="text-xs text-indigo-200"></p></div>
                 </div>
-                <nav id="sidebar-nav"></nav>
+                <nav id="sidebar-nav">
+                    <a id="nav-ai-tutor" href="#" class="flex items-center space-x-3 p-3 mb-1 rounded-lg hover:bg-white/10 transition"><i data-feather="message-square" class="w-5 h-5"></i><span>AI Tutor</span></a>
+                    <a id="nav-study-materials" href="#" class="flex items-center space-x-3 p-3 mb-1 rounded-lg hover:bg-white/10 transition"><i data-feather="file-text" class="w-5 h-5"></i><span>Study Materials</span></a>
+                    <a id="nav-quizzes" href="#" class="flex items-center space-x-3 p-3 mb-1 rounded-lg hover:bg-white/10 transition"><i data-feather="check-square" class="w-5 h-5"></i><span>Quizzes</span></a>
+                    <a id="nav-admin-dashboard" href="#" class="hidden items-center space-x-3 p-3 mb-1 rounded-lg hover:bg-white/10 transition"><i data-feather="sliders" class="w-5 h-5"></i><span>Admin Dashboard</span></a>
+                </nav>
             </div>
         </div>
         <div class="mt-auto p-4 border-t border-indigo-400/20">
-            <a href="#" id="logout-btn" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-white/10 transition">
-                <i data-feather="log-out" class="w-5 h-5"></i><span>Log Out</span>
-            </a>
+            <a href="#" id="logout-btn" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-white/10 transition"><i data-feather="log-out" class="w-5 h-5"></i><span>Log Out</span></a>
         </div>
     </div>
 
-    <main class="ml-64 p-8 min-h-screen"></main>
+    <main class="ml-64 p-8 min-h-screen">
+        <div id="main-content">
+            <header class="flex justify-between items-center mb-8"><h2 class="text-2xl font-bold text-gray-800">AI Tutor</h2></header>
+            <p>El nuevo diseño del dashboard para alumnos y profesores irá aquí.</p>
+        </div>
+
+        <div id="admin-panel" class="hidden">
+            <header class="mb-8"><h2 class="text-2xl font-bold text-gray-800">Admin Dashboard</h2></header>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm flex items-center space-x-4"><div class="bg-blue-100 p-3 rounded-full"><i data-feather="users" class="w-6 h-6 text-blue-600"></i></div><div><p class="text-gray-500 text-sm">Total Students</p><p id="stats-students" class="text-2xl font-bold">0</p></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-sm flex items-center space-x-4"><div class="bg-green-100 p-3 rounded-full"><i data-feather="user-check" class="w-6 h-6 text-green-600"></i></div><div><p class="text-gray-500 text-sm">Total Teachers</p><p id="stats-teachers" class="text-2xl font-bold">0</p></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-sm flex items-center space-x-4"><div class="bg-purple-100 p-3 rounded-full"><i data-feather="check-square" class="w-6 h-6 text-purple-600"></i></div><div><p class="text-gray-500 text-sm">Total Quizzes</p><p id="stats-quizzes" class="text-2xl font-bold">0</p></div></div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm">
+                <div class="p-6 border-b flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <h3 class="text-lg font-medium">User Management</h3>
+                    <div class="flex items-center gap-4">
+                        <input type="text" id="user-search-input" placeholder="Search by email..." class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <button id="addUserBtn" class="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition whitespace-nowrap"><i data-feather="plus" class="w-4 h-4 inline -mt-0.5"></i> Add New User</button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th class="px-6 py-3">ID</th><th class="px-6 py-3">Email</th><th class="px-6 py-3">Role</th><th class="px-6 py-3">Actions</th></tr></thead><tbody id="user-table-body"></tbody></table>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <div id="addUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4">
@@ -66,7 +86,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             feather.replace();
             updateUserInfo();
-            setupNavigationAndViews();
+            setupDashboard();
             document.getElementById('logout-btn').addEventListener('click', (e) => { e.preventDefault(); logout(); });
         });
 
@@ -82,55 +102,25 @@
             window.location.href = '/';
         }
 
-        function setupNavigationAndViews() {
-            const nav = document.getElementById('sidebar-nav');
-            const main = document.querySelector('main');
-            nav.innerHTML = ''; 
-            main.innerHTML = '';
-
-            let views = {};
+        function setupDashboard() {
             if (user.role === 'admin') {
-                views = { 'Admin Dashboard': { icon: 'sliders', content: adminDashboardView() } };
-            } else {
-                views = {
-                    'AI Tutor': { icon: 'message-square', content: aiTutorView() },
-                    'Study Materials': { icon: 'file-text', content: '<div>Study Materials Content Here</div>' },
-                    'Quizzes': { icon: 'check-square', content: quizzesView() }
-                };
-            }
+                // Configuración para el Admin
+                document.getElementById('main-content').classList.add('hidden');
+                document.getElementById('admin-panel').classList.remove('hidden');
 
-            Object.keys(views).forEach(name => {
-                const viewId = name.toLowerCase().replace(' ', '-');
-                const link = document.createElement('a');
-                link.href = '#';
-                link.id = `nav-${viewId}`;
-                link.className = 'flex items-center space-x-3 p-3 mb-1 rounded-lg hover:bg-white/10 transition';
-                link.innerHTML = `<i data-feather="${views[name].icon}" class="w-5 h-5"></i><span>${name}</span>`;
-                link.addEventListener('click', (e) => { e.preventDefault(); showView(viewId); });
-                nav.appendChild(link);
+                document.getElementById('nav-ai-tutor').classList.add('hidden');
+                document.getElementById('nav-study-materials').classList.add('hidden');
+                document.getElementById('nav-quizzes').classList.add('hidden');
+                
+                const adminNavLink = document.getElementById('nav-admin-dashboard');
+                adminNavLink.classList.remove('hidden');
+                adminNavLink.classList.add('active-tab', 'flex');
 
-                const viewContainer = document.createElement('div');
-                viewContainer.id = viewId;
-                viewContainer.className = 'hidden';
-                viewContainer.innerHTML = views[name].content;
-                main.appendChild(viewContainer);
-            });
-
-            feather.replace();
-            const firstViewId = Object.keys(views)[0].toLowerCase().replace(' ', '-');
-            showView(firstViewId);
-        }
-
-        function showView(viewId) {
-            document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden'));
-            document.querySelectorAll('#sidebar-nav a').forEach(a => a.classList.remove('active-tab'));
-            document.getElementById(viewId).classList.remove('hidden');
-            document.getElementById(`nav-${viewId}`).classList.add('active-tab');
-
-            if (viewId === 'admin-dashboard') {
-                // Si la vista de admin se muestra, cargamos sus datos y añadimos los event listeners
                 loadAdminStats();
                 loadUsersTable();
+                
+                const searchInput = document.getElementById('user-search-input');
+                searchInput.addEventListener('keyup', () => loadUsersTable(searchInput.value));
                 
                 const addUserModal = document.getElementById('addUserModal');
                 const addUserBtn = document.getElementById('addUserBtn');
@@ -140,54 +130,59 @@
                 closeModalBtn.addEventListener('click', () => addUserModal.classList.add('hidden'));
                 cancelModalBtn.addEventListener('click', () => addUserModal.classList.add('hidden'));
                 document.getElementById('addUserForm').addEventListener('submit', handleAddNewUser);
-                
-                const searchInput = document.getElementById('user-search-input');
-                searchInput.addEventListener('keyup', () => { loadUsersTable(searchInput.value); });
-            }
-            if (viewId === 'quizzes') {
-                loadQuizzes();
+
+            } else {
+                // Configuración para Alumno y Profesor
+                document.getElementById('nav-ai-tutor').classList.add('active-tab');
             }
         }
         
-        // --- PLANTILLAS DE VISTAS ---
-
-        function adminDashboardView() {
-            // ///
-            // //  AQUÍ ESTÁ EL CÓDIGO RESTAURADO DEL PANEL DE ADMIN  //
-            // ///
-            return `
-                <header class="mb-8"><h2 class="text-2xl font-bold text-gray-800">Admin Dashboard</h2></header>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white p-6 rounded-xl shadow-sm flex items-center space-x-4"><div class="bg-blue-100 p-3 rounded-full"><i data-feather="users" class="w-6 h-6 text-blue-600"></i></div><div><p class="text-gray-500 text-sm">Total Students</p><p id="stats-students" class="text-2xl font-bold">0</p></div></div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm flex items-center space-x-4"><div class="bg-green-100 p-3 rounded-full"><i data-feather="user-check" class="w-6 h-6 text-green-600"></i></div><div><p class="text-gray-500 text-sm">Total Teachers</p><p id="stats-teachers" class="text-2xl font-bold">0</p></div></div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm flex items-center space-x-4"><div class="bg-purple-100 p-3 rounded-full"><i data-feather="check-square" class="w-6 h-6 text-purple-600"></i></div><div><p class="text-gray-500 text-sm">Total Quizzes</p><p id="stats-quizzes" class="text-2xl font-bold">0</p></div></div>
-                </div>
-                <div class="bg-white rounded-xl shadow-sm">
-                    <div class="p-6 border-b flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                        <h3 class="text-lg font-medium">User Management</h3>
-                        <div class="flex items-center gap-4">
-                            <input type="text" id="user-search-input" placeholder="Search by email..." class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <button id="addUserBtn" class="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition whitespace-nowrap"><i data-feather="plus" class="w-4 h-4 inline -mt-0.5"></i> Add New User</button>
-                        </div>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th class="px-6 py-3">ID</th><th class="px-6 py-3">Email</th><th class="px-6 py-3">Role</th><th class="px-6 py-3">Actions</th></tr></thead><tbody id="user-table-body"></tbody></table>
-                    </div>
-                </div>
-            `;
+        // --- FUNCIONES DE ADMIN ---
+        async function handleAddNewUser(event) {
+            event.preventDefault();
+            const email = document.getElementById('newUserEmail').value;
+            const password = document.getElementById('newUserPassword').value;
+            const role = document.getElementById('newUserRole').value;
+            const response = await fetch('/api/admin/users/add', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ email, password, role }) });
+            const result = await response.json();
+            if (result.success) {
+                alert('User added successfully!');
+                document.getElementById('addUserForm').reset();
+                document.getElementById('addUserModal').classList.add('hidden');
+                loadUsersTable();
+            } else { alert('Error: ' + result.message); }
         }
-        
-        function aiTutorView() { /* ... (sin cambios) ... */ }
-        function quizzesView() { /* ... (sin cambios) ... */ }
 
-        // --- LÓGICA DE ADMIN Y QUIZZES (sin cambios) ---
-        async function handleAddNewUser(event) { /* ... */ }
-        async function loadAdminStats() { /* ... */ }
-        async function loadUsersTable(searchTerm = '') { /* ... */ }
-        async function deleteUser(id, username) { /* ... */ }
-        let quizData = [];
-        async function loadQuizzes() { /* ... */ }
-        function showQuizQuestion(quizId, questionIndex) { /* ... */ }
+        async function loadAdminStats() {
+            const response = await fetch('/api/admin/stats');
+            const stats = await response.json();
+            document.getElementById('stats-students').textContent = stats.students;
+            document.getElementById('stats-teachers').textContent = stats.teachers;
+            document.getElementById('stats-quizzes').textContent = stats.quizzes;
+        }
+
+        async function loadUsersTable(searchTerm = '') {
+            const response = await fetch(`/api/admin/users?search=${encodeURIComponent(searchTerm)}`);
+            const users = await response.json();
+            const tableBody = document.getElementById('user-table-body');
+            tableBody.innerHTML = '';
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.className = 'bg-white border-b';
+                row.innerHTML = `<td class="px-6 py-4">${user.id}</td><td class="px-6 py-4 font-medium text-gray-900">${user.username}</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium rounded-full ${user.role === 'admin' ? 'bg-red-100 text-red-800' : (user.role === 'profesor' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800')}">${user.role}</span></td><td class="px-6 py-4"><button onclick="deleteUser(${user.id}, '${user.username}')" class="text-red-500 hover:text-red-700"><i data-feather="trash-2" class="w-4 h-4"></i></button></td>`;
+                tableBody.appendChild(row);
+            });
+            feather.replace();
+        }
+
+        async function deleteUser(id, username) {
+            if (confirm(`Are you sure you want to delete: ${username}?`)) {
+                const response = await fetch('/api/admin/users/delete', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ id: id }) });
+                const result = await response.json();
+                if (result.success) { loadUsersTable(); } 
+                else { alert('Error: ' + result.message); }
+            }
+        }
     </script>
 </body>
 </html>
