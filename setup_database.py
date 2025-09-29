@@ -1,19 +1,19 @@
 # setup_database.py
 
 import sqlite3
-import hashlib # Usaremos esto para "hashear" contraseñas simples
+import bcrypt
 
 def hash_password(password):
-    """Una función simple para hashear contraseñas para el ejemplo."""
-    return hashlib.sha256(password.encode()).hexdigest()
+    """Hashea la contraseña usando bcrypt."""
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed.decode('utf-8')
 
-# Conectar a la base de datos (se creará si no existe)
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
 
 print("Creando tablas...")
 
-# --- Tabla de Usuarios ---
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -73,22 +73,19 @@ CREATE TABLE IF NOT EXISTS results (
 
 print("Tablas creadas exitosamente.")
 
-# --- Insertar Usuarios de Ejemplo ---
-# ¡Importante! Solo insertamos si la tabla está vacía para no duplicar.
 cursor.execute("SELECT COUNT(*) FROM users")
 if cursor.fetchone()[0] == 0:
     print("Insertando usuarios de ejemplo...")
     users_to_add = [
-        ('alumno1', hash_password('pass123'), 'alumno'),
-        ('profesor1', hash_password('pass123'), 'profesor'),
-        ('admin1', hash_password('pass123'), 'admin')
+        ('alumno1@example.com', hash_password('pass123'), 'alumno'),
+        ('profesor1@example.com', hash_password('pass123'), 'profesor'),
+        ('admin1@example.com', hash_password('pass123'), 'admin')
     ]
     cursor.executemany("INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)", users_to_add)
     print("Usuarios de ejemplo insertados.")
 else:
     print("La tabla de usuarios ya contiene datos.")
 
-# Guardar cambios y cerrar conexión
 conn.commit()
 conn.close()
 
