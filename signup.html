@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | EduAI Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        }
+        .glass-card {
+            backdrop-filter: blur(16px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+    <div class="glass-card rounded-2xl overflow-hidden w-full max-w-md shadow-2xl">
+        <div class="p-8">
+            <div class="text-center mb-8">
+                <div class="flex justify-center mb-4">
+                    <i data-feather="user-plus" class="w-12 h-12 text-indigo-200"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-white mb-2">Create Account</h1>
+                <p class="text-indigo-200">Join EduAI as a student or educator</p>
+            </div>
+
+            <form id="signupForm">
+                <div class="mb-4">
+                    <label for="fullName" class="block text-sm font-medium text-indigo-100 mb-2">Full Name</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-feather="user" class="w-5 h-5 text-indigo-300"></i>
+                        </div>
+                        <input type="text" id="fullName" required class="w-full pl-10 pr-4 py-3 bg-indigo-900/30 border border-indigo-700 rounded-lg text-white placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" placeholder="John Doe">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-indigo-100 mb-2">Email</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-feather="mail" class="w-5 h-5 text-indigo-300"></i>
+                        </div>
+                        <input type="email" id="email" required class="w-full pl-10 pr-4 py-3 bg-indigo-900/30 border border-indigo-700 rounded-lg text-white placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" placeholder="your@email.com">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-indigo-100 mb-2">Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-feather="lock" class="w-5 h-5 text-indigo-300"></i>
+                        </div>
+                        <input type="password" id="password" required minlength="8" class="w-full pl-10 pr-4 py-3 bg-indigo-900/30 border border-indigo-700 rounded-lg text-white placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" placeholder="••••••••">
+                        <button type="button" class="absolute right-3 top-3 text-indigo-300 hover:text-white toggle-password">
+                            <i data-feather="eye" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label for="userType" class="block text-sm font-medium text-indigo-100 mb-2">I am a</label>
+                    <select id="userType" required class="w-full px-4 py-3 bg-indigo-900/30 border border-indigo-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                        <option value="" disabled selected>Select account type</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Administrator (requires code)</option>
+                    </select>
+                </div>
+
+                <div id="adminCodeField" class="mb-6 hidden">
+                    <label for="adminCode" class="block text-sm font-medium text-indigo-100 mb-2">Admin Code</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-feather="key" class="w-5 h-5 text-indigo-300"></i>
+                        </div>
+                        <input type="password" id="adminCode" class="w-full pl-10 pr-4 py-3 bg-indigo-900/30 border border-indigo-700 rounded-lg text-white placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" placeholder="Enter admin code">
+                    </div>
+                </div>
+
+                <div class="flex items-center mb-6">
+                    <input type="checkbox" id="terms" required class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                    <label for="terms" class="ml-2 block text-sm text-indigo-200">
+                        I agree to the <a href="#" class="text-white hover:underline">Terms of Service</a> and <a href="#" class="text-white hover:underline">Privacy Policy</a>
+                    </label>
+                </div>
+                <button type="button" class="w-full py-3 px-4 bg-white text-indigo-700 font-medium rounded-lg hover:bg-indigo-100 transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-500" onclick="document.getElementById('signupForm').submit()">
+                    Create Account
+                </button>
+</form>
+
+            <div class="mt-8 text-center">
+                <p class="text-indigo-200">
+                    Already have an account? 
+                    <a href="login.html" class="font-medium text-white hover:text-indigo-200 transition">Sign in</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        document.querySelector('.toggle-password').addEventListener('click', function() {
+            const password = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (password.type === 'password') {
+                password.type = 'text';
+                feather.icons['eye-off'].replace(icon);
+            } else {
+                password.type = 'password';
+                feather.icons['eye'].replace(icon);
+            }
+        });
+
+        // Show/hide admin code field
+        document.getElementById('userType').addEventListener('change', function() {
+            const adminCodeField = document.getElementById('adminCodeField');
+            adminCodeField.classList.toggle('hidden', this.value !== 'admin');
+        });
+
+        // Form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate form
+            const name = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('userType').value;
+            const adminCode = document.getElementById('userType').value === 'admin' ? document.getElementById('adminCode').value : null;
+            const termsChecked = document.getElementById('terms').checked;
+
+            // Basic validation
+            if (!name || !email || !password || !role || !termsChecked) {
+                alert('Please fill all required fields and accept terms');
+                return;
+            }
+
+            if (role === 'admin' && !adminCode) {
+                alert('Please enter admin code');
+                return;
+            }
+
+            // Email validation
+            if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Password validation
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long');
+                return;
+            }
+            // Store user data (in a real app, this would be an API call)
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPassword', password);
+            localStorage.setItem('userRole', role);
+            
+            // Redirect to success page with user data
+            const queryParams = new URLSearchParams({
+                name: name,
+                email: email,
+                role: role
+            }).toString();
+            
+            window.location.href = `registration_success.html?${queryParams}`;
+});
+// Initialize Feather Icons
+        feather.replace();
+    </script>
+</body>
+</html>
