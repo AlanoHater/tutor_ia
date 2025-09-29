@@ -1,116 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | EduAI Companion</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-        .gradient-bg {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-        }
-        .glass-card {
-            backdrop-filter: blur(16px);
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | EduAI Companion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    }
+    .glass-card {
+      backdrop-filter: blur(16px);
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
 </head>
 <body class="gradient-bg min-h-screen flex items-center justify-center p-4">
-    <div class="glass-card rounded-2xl overflow-hidden w-full max-w-md shadow-2xl">
-        <div class="p-8">
-            <div class="text-center mb-8">
-                <div class="flex justify-center mb-4">
-                    <i data-feather="book-open" class="w-12 h-12 text-indigo-200"></i>
-                </div>
-                <h1 class="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-                <p class="text-indigo-200">Login to your EduAI account</p>
-            </div>
-
-            <form>
-                <div class="mb-6">
-                    <label for="email" class="block text-sm font-medium text-indigo-100 mb-2">Email</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i data-feather="mail" class="w-5 h-5 text-indigo-300"></i>
-                        </div>
-                        <input type="email" id="email" class="w-full pl-10 pr-4 py-3 bg-indigo-900/30 border border-indigo-700 rounded-lg text-white placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" placeholder="your@email.com">
-                    </div>
-                </div>
-
-                <div class="mb-6">
-                    <label for="password" class="block text-sm font-medium text-indigo-100 mb-2">Password</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i data-feather="lock" class="w-5 h-5 text-indigo-300"></i>
-                        </div>
-                        <input type="password" id="password" class="w-full pl-10 pr-4 py-3 bg-indigo-900/30 border border-indigo-700 rounded-lg text-white placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" placeholder="••••••••">
-                        <button type="button" class="absolute right-3 top-3 text-indigo-300 hover:text-white toggle-password">
-                            <i data-feather="eye" class="w-5 h-5"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="remember" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                        <label for="remember" class="ml-2 block text-sm text-indigo-200">Remember me</label>
-                    </div>
-                    <a href="#" class="text-sm text-indigo-200 hover:text-white transition">Forgot password?</a>
-                </div>
-                <button type="button" class="w-full py-3 px-4 bg-white text-indigo-700 font-medium rounded-lg hover:bg-indigo-100 transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-500"
-                    onclick="loginUser()">
-                    Sign In
-                </button>
-</form>
-
-            <div class="mt-8 text-center">
-                <p class="text-indigo-200">
-                    Don't have an account? 
-                    <a href="signup.html" class="font-medium text-white hover:text-indigo-200 transition">Sign up</a>
-</p>
-            </div>
+  <div class="glass-card rounded-2xl overflow-hidden w-full max-w-md shadow-2xl">
+    <div class="p-8">
+      <div class="text-center mb-8">
+        <div class="flex justify-center mb-4">
+          <i data-feather="book-open" class="w-12 h-12 text-indigo-200"></i>
         </div>
+        <h1 class="text-3xl font-bold text-white mb-2">Welcome Back</h1>
+        <p class="text-indigo-200">Login to your EduAI account</p>
+      </div>
+
+      <form>
+        <div class="mb-6">
+          <label for="email" class="block text-sm font-medium text-indigo-100 mb-2">Email</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i data-feather="mail" class="w-5 h-5 text-indigo-300"></i>
+            </div>
+            <input type="email" id="email"
+              class="w-full pl-10 pr-4 py-3 bg-indigo-900/30 border border-indigo-700 rounded-lg text-white placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+              placeholder="your@email.com">
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <label for="password" class="block text-sm font-medium text-indigo-100 mb-2">Password</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i data-feather="lock" class="w-5 h-5 text-indigo-300"></i>
+            </div>
+            <input type="password" id="password"
+              class="w-full pl-10 pr-4 py-3 bg-indigo-900/30 border border-indigo-700 rounded-lg text-white placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+              placeholder="••••••••">
+            <button type="button"
+              class="absolute right-3 top-3 text-indigo-300 hover:text-white toggle-password">
+              <i data-feather="eye" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center">
+            <input type="checkbox" id="remember"
+              class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+            <label for="remember" class="ml-2 block text-sm text-indigo-200">Remember me</label>
+          </div>
+          <a href="#" class="text-sm text-indigo-200 hover:text-white transition">Forgot password?</a>
+        </div>
+
+        <button type="button"
+          class="w-full py-3 px-4 bg-white text-indigo-700 font-medium rounded-lg hover:bg-indigo-100 transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-500"
+          onclick="loginUser()">
+          Sign In
+        </button>
+      </form>
+
+      <div class="mt-8 text-center">
+        <p class="text-indigo-200">
+          Don't have an account?
+          <a href="signup.html" class="font-medium text-white hover:text-indigo-200 transition">Sign up</a>
+        </p>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // Toggle password visibility
-        document.querySelector('.toggle-password').addEventListener('click', function() {
-            const password = document.getElementById('password');
-            const icon = this.querySelector('i');
-            if (password.type === 'password') {
-                password.type = 'text';
-                feather.icons['eye-off'].replace(icon);
-            } else {
-                password.type = 'password';
-                feather.icons['eye'].replace(icon);
-            }
-        });
-        // Login function
-        function loginUser() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            // In a real app, this would be an API call to verify credentials
-            // For demo, we'll use localStorage from registration
-            const storedEmail = localStorage.getItem('userEmail');
-            const storedPassword = localStorage.getItem('userPassword');
-            
-            if (email === storedEmail && password === storedPassword) {
-                window.location.href = 'dashboard.html';
-            } else {
-                alert('Invalid credentials. Please try again.');
-            }
-        }
+  <script>
+    // Toggle password visibility
+    document.querySelector('.toggle-password').addEventListener('click', function () {
+      const password = document.getElementById('password');
+      const icon = this.querySelector('i');
+      if (password.type === 'password') {
+        password.type = 'text';
+        feather.icons['eye-off'].replace(icon);
+      } else {
+        password.type = 'password';
+        feather.icons['eye'].replace(icon);
+      }
+    });
 
-        // Initialize Feather Icons
-        feather.replace();
-</script>
+    // Login function
+    async function loginUser() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // ¡IMPORTANTE! Guardamos los datos del usuario para usarlos en el dashboard
+        localStorage.setItem('userName', result.user.username);
+        localStorage.setItem('userRole', result.user.role);
+
+        // Redirigimos al dashboard
+        window.location.href = '/dashboard';
+      } else {
+        alert('Error: ' + result.message);
+      }
+    }
+
+    // Initialize Feather Icons
+    feather.replace();
+  </script>
 </body>
 </html>
